@@ -1,1 +1,125 @@
-<p>custom-page.component works!</p>,
+<section class="m-5">
+  <h1 class="text-2xl font-bold">Pipes Personalizados</h1>
+  <hr />
+  <h3 class="text-xl font-thin">Pipes no incluidos en Angular</h3>
+</section>
+
+<section class="my-2">
+  <div class="stats shadow">
+    <div class="stat">
+      <div class="stat-title">ToggleCase Pipie</div>
+      <div class="stat-value">{{ name() | toggleCase: upperCase() }}</div>
+      <div class="stat-desc">{{ name() }}</div>
+
+      <button
+        class="btn btn-outline btn-primary"
+        (click)="changeCase()"
+      >
+        ToogleCase
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="divider my-2"></div>
+
+<section class="my-2">
+  <h1 class="text-2xl font-bold">
+    Filtrando por:{{ searchQuery() }} Ordenando por: {{ translateSort() }}
+  </h1>
+  <div class="flex gap-2 justify-end w-full mt-2">
+    <input
+      type="text"
+      class="input input-bordered w-full max-w-xs"
+      placeholder="Buscar heroé"
+      (input)="searchQuery.set(txtSearch.value)"
+      #txtSearch
+    />
+
+    <div class="flex flex-1"></div>
+    <button
+      (click)="sortBy.set('name')"
+      class="btn btn-outline btn-primary"
+    >
+      Por nombre
+    </button>
+    <button
+      (click)="sortBy.set('canFly')"
+      class="btn btn-outline btn-accent"
+    >
+      Por volar
+    </button>
+    <button
+      (click)="sortBy.set('color')"
+      class="btn btn-outline btn-secondary"
+    >
+      Por color
+    </button>
+    <button
+      (click)="sortBy.set('creator')"
+      class="btn btn-outline btn-info"
+    >
+      Por creador
+    </button>
+  </div>
+</section>
+
+<section class="my-2">
+  <div class="overflow-x-auto w-full">
+    <table class="table table-s w-full">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Puede volar</th>
+          <th>Color</th>
+          <th>Creador</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (
+          hero of heroes() | heroFilter: searchQuery() | heroSortBy: sortBy();
+          track hero.id;
+          let index = $index
+        ) {
+          <!-- row -->
+          <tr class="hover:bg-base-300">
+            <th>{{ index + 1 }}</th>
+            <td>{{ hero.name }}</td>
+            <td>
+              <span
+                class="text-xs w-44 badge badge-outline"
+                [class.badge-success]="hero.canFly"
+                [class.badge-error]="!hero.canFly"
+              >
+                {{ hero.canFly | canFly }}
+              </span>
+            </td>
+            <td>
+              <span
+                class="text-xs w-44 badge badge-outline"
+                [style.color]="
+                  hero.color === 1 ? null : (hero.color | colorCase)
+                "
+                [class.text-white]="hero.color === 1"
+              >
+                {{ hero.color | heroColor | titlecase }}
+              </span>
+            </td>
+            <td>
+              <span
+                class="text-xs w-44 badge badge-outline"
+                [class.badge-info]="hero.creator === 0"
+                [class.badge-error]="hero.creator === 1"
+              >
+                {{ hero.creator | creatorCase }}
+              </span>
+            </td>
+          </tr>
+          <!-- end row -->
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
