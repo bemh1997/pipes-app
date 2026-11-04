@@ -4,6 +4,8 @@ Aplicación de práctica de la Sección 12 del curso de Angular. En esta secció
 
 ## Temas
 
+### Sección 12
+
 1. `DatePipe`
 2. `UpperCasePipe`
 3. `LowerCasePipe`
@@ -18,6 +20,13 @@ Aplicación de práctica de la Sección 12 del curso de Angular. En esta secció
 12. `SlicePipe`
 13. `AsyncPipe`
 14. Internacionalización de Pipes y de la aplicación
+
+### Sección 13
+
+1. Pipes para transformar strings
+2. Pipes dentro de propiedades computadas
+3. Pipes para filtrar arreglos
+4. Pipes para ordenar arreglos
 
 ## Desarrollo
 
@@ -40,6 +49,7 @@ npm test -- --watch=false
 ## Ramas
 
 - `seccion12`: ejercicios y ejemplos de Pipes.
+- `seccion13`: temas de transformación de strings, propiedades computadas y filtrado y ordenamiento de arreglos.
 - `master`: versión estable más reciente.
 
 No agregues archivos `.env` ni claves locales al repositorio.
